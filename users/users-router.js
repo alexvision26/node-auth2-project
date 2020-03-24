@@ -3,7 +3,11 @@ const router = require("express").Router();
 const Users = require("./userModel");
 
 router.get("/", (req, res) => {
-  res.status(200).json({ message: "users endpoints running" });
+  Users.find()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;
